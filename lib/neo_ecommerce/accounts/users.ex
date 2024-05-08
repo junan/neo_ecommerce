@@ -1,20 +1,15 @@
 defmodule NeoEcommerce.Accounts.Users do
   alias NeoEcommerce.Repo
-  alias NeoEcommerce.Auth.Hasher
   alias NeoEcommerce.Accounts.Schemas.{User, Role}
+
+  def get_user_by_id(id), do: Repo.get(User, id)
+
+  def get_user_by_email(email), do: Repo.get_by(User, %{email: email})
 
   def create(attrs) do
     attrs
     |> User.create_changeset()
     |> Repo.insert()
-  end
-
-  def authenticate_user(%User{password_hash: password_hash} = user, password) do
-    if Hasher.verify_secret(password, password_hash, :argon2) do
-      {:ok, user}
-    else
-      {:error, :invalid_password}
-    end
   end
 
   def assign_role(%User{} = user, %Role{} = role) do

@@ -1,5 +1,26 @@
 <link phx-track-static rel="stylesheet" href={~p"/assets/home.css"} />
 <.flash_group flash={@flash} />
+
+<%= if @current_user do %>
+  <div>
+    <p>Welcome, <%= @current_user.email %>!</p>
+    <.link
+      href={~p"/admin/logout"}
+      method="delete"
+      class="btn btn-primary"
+    >
+      Logout
+    </.link>
+  </div>
+<% else %>
+  <div>
+    <p>Welcome, Guest!</p>
+    <.link href={~p"/admin/login"} class="btn btn-primary">
+      Login
+    </.link>
+  </div>
+<% end %>
+
 <div class="left-[40rem] fixed inset-y-0 right-0 z-0 hidden lg:block xl:left-[50rem]">
   <svg
     viewBox="0 0 1480 957"

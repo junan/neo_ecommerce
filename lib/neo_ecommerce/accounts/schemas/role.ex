@@ -18,5 +18,10 @@ defmodule NeoEcommerce.Accounts.Schemas.Role do
     |> cast(attrs, [:name])
     |> validate_required([:name])
     |> unique_constraint(:name)
+    |> downcase_role_name()
+  end
+
+  defp downcase_role_name(%Ecto.Changeset{changes: %{name: name}, valid?: true} = changeset) do
+    put_change(changeset, :name, String.downcase(name))
   end
 end

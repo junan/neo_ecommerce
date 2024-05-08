@@ -8,6 +8,7 @@ defmodule NeoEcommerceWeb.Router do
     plug :put_root_layout, html: {NeoEcommerceWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug NeoEcommerceWeb.SetCurrentUserPlug
   end
 
   pipeline :api do
@@ -18,6 +19,48 @@ defmodule NeoEcommerceWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  pipeline :admin_auth do
+    plug :browser
+    plug NeoEcommerceWeb.Admin.EnsureAuthenticatedUserPlug
+  end
+
+  pipeline :admin_unauth do
+    plug :browser
+    plug NeoEcommerceWeb.Admin.EnsureUnauthenticatedUserPlug
+  end
+
+  pipeline :admin do
+    plug :browser
+    plug NeoEcommerceWeb.Admin.EnsureAuthenticatedUserPlug
+    plug NeoEcommerceWeb.Admin.EnsureAdminUserPlug
+  end
+
+  scope "/", NeoEcommerceWeb do
+    pipe_through :browser
+
+    # regular routes
+  end
+
+  scope "/admin", NeoEcommerceWeb.Admin do
+    scope "/" do
+      pipe_through :admin_unauth
+
+      get "/login", SessionController, :new
+      post "/login", SessionController, :create
+    end
+
+    scope "/" do
+      pipe_through :admin_auth
+
+      delete "/logout", SessionController, :delete
+
+      pipe_through :admin
+
+      # get "/", DashboardController, :index
+      # admin routes here
+    end
   end
 
   # Other scopes may use custom stacks.
