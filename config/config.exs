@@ -22,6 +22,9 @@ config :neo_ecommerce, NeoEcommerceWeb.Endpoint,
   pubsub_server: NeoEcommerce.PubSub,
   live_view: [signing_salt: "wMneqwMC"]
 
+config :torch,
+  otp_app: :neo_ecommerce
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
