@@ -17,7 +17,7 @@ defmodule NeoEcommerceWeb.Admin.SessionController do
         conn
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "Logged in successfully.")
-        |> redirect(to: "/")
+        |> redirect(to: "/admin/products")
 
       {:error, :invalid_credentials} ->
         csrf_token = Plug.CSRFProtection.get_csrf_token()

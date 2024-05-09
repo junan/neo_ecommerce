@@ -18,6 +18,8 @@ defmodule NeoEcommerce.Products.Schemas.Product do
 
   @doc false
   def changeset(product \\ %__MODULE__{}, attrs) do
+    IO.inspect(attrs, label: "debug")
+
     product
     |> cast(attrs, [:name, :description, :price, :inventory_count, :category_id])
     |> validate_required([:name, :description, :price, :inventory_count])

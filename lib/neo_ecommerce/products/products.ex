@@ -13,6 +13,7 @@ defmodule NeoEcommerce.Products.Products do
     attrs
     |> Product.changeset()
     |> Repo.insert()
+    |> notify(:product_created)
   end
 
   @doc """
@@ -25,7 +26,12 @@ defmodule NeoEcommerce.Products.Products do
 
   """
   def list_products do
-    Repo.all(Product) |> Repo.preload(:category)
+    query =
+      from p in Product,
+        order_by: [desc: p.inserted_at],
+        preload: [:category]
+
+    Repo.all(query)
   end
 
   @doc """
@@ -62,6 +68,7 @@ defmodule NeoEcommerce.Products.Products do
     product
     |> Product.changeset(attrs)
     |> Repo.update()
+    |> notify(:product_updated)
   end
 
   @doc """
@@ -77,7 +84,9 @@ defmodule NeoEcommerce.Products.Products do
 
   """
   def delete_product(%Product{} = product) do
-    Repo.delete(product)
+    product
+    |> Repo.delete()
+    |> notify(:product_deleted)
   end
 
   @doc """
@@ -92,4 +101,12 @@ defmodule NeoEcommerce.Products.Products do
   def change_product(%Product{} = product, attrs \\ %{}) do
     Product.changeset(product, attrs)
   end
+
+  defp notify({:ok, %Product{} = product}, event) do
+    Phoenix.PubSub.broadcast(NeoEcommerce.PubSub, "products:all", {event, product})
+
+    {:ok, product}
+  end
+
+  defp notify({:error, _changeset} = error, _event), do: error
 end

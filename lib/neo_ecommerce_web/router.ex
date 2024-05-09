@@ -18,7 +18,7 @@ defmodule NeoEcommerceWeb.Router do
   scope "/", NeoEcommerceWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", ProductLive.Index, :index
   end
 
   pipeline :admin_auth do

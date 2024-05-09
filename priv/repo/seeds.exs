@@ -2,6 +2,7 @@ alias NeoEcommerce.Repo
 alias NeoEcommerce.Products.Schemas.{Category, Product}
 alias NeoEcommerce.Accounts.Schemas.{User, Role}
 alias NeoEcommerce.Auth.Hasher
+alias NeoEcommerce.Helpers.DbHelper
 
 # Helper function to read a CSV file and decode it
 read_csv = fn file_path ->
@@ -109,3 +110,8 @@ populate_products.()
 populate_roles.()
 populate_users.()
 associate_users_roles.()
+
+DbHelper.reset_pk_sequence!("users")
+DbHelper.reset_pk_sequence!("roles")
+DbHelper.reset_pk_sequence!("categories")
+DbHelper.reset_pk_sequence!("products")
