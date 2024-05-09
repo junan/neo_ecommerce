@@ -1,19 +1,96 @@
 defmodule NeoEcommerce.Products.Products do
-  alias NeoEcommerce.Repo
-  alias NeoEcommerce.Products.Schemas.{Product, Tag}
+  import Ecto.Query, warn: false
+  import Filtrex.Type.Config
 
-  def create(attrs) do
+  alias NeoEcommerce.Repo
+  alias NeoEcommerce.Products.Schemas.Product
+
+  use Torch.Pagination,
+    repo: NeoEcommerce.Repo,
+    model: NeoEcommerce.Products.Schemas.Product,
+    name: :products
+
+  def create_product(attrs) do
     attrs
-    |> Product.create_changeset()
+    |> Product.changeset()
     |> Repo.insert()
   end
 
-  def assign_tag(%Product{} = product, %Tag{} = tag) do
-    preloaded_product = Repo.preload(product, :tags)
+  @doc """
+  Returns the list of products.
 
-    preloaded_product
-    |> Ecto.Changeset.change()
-    |> Ecto.Changeset.put_assoc(:tags, preloaded_product.tags ++ [tag])
+  ## Examples
+
+      iex> list_products()
+      [%Product{}, ...]
+
+  """
+  def list_products do
+    Repo.all(Product) |> Repo.preload(:category)
+  end
+
+  @doc """
+  Gets a single product.
+
+  Raises `Ecto.NoResultsError` if the Product does not exist.
+
+  ## Examples
+
+      iex> get_product!(123)
+      %Product{}
+
+      iex> get_product!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_product!(id) do
+    Repo.get!(Product, id) |> Repo.preload(:category)
+  end
+
+  @doc """
+  Updates a product.
+
+  ## Examples
+
+      iex> update_product(product, %{field: new_value})
+      {:ok, %Product{}}
+
+      iex> update_product(product, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_product(%Product{} = product, attrs) do
+    product
+    |> Product.changeset(attrs)
     |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Product.
+
+  ## Examples
+
+      iex> delete_product(product)
+      {:ok, %Product{}}
+
+      iex> delete_product(product)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_product(%Product{} = product) do
+    Repo.delete(product)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking product changes.
+
+  ## Examples
+
+      iex> change_product(product)
+      %Ecto.Changeset{source: %Product{}}
+
+  """
+  def change_product(%Product{} = product, attrs \\ %{}) do
+    Product.changeset(product, attrs)
   end
 end

@@ -1,0 +1,42 @@
+<section id="torch-toolbar">
+  <div class="torch-container">
+    <.link href={~p"/admin/products/#{@product}/edit"} class="torch-button"><%= Torch.I18n.message("Edit") %></.link>
+    <.link href={~p"/admin/products"} class="torch-button"><%= Torch.I18n.message("Back") %></.link>
+  </div>
+</section>
+
+<section id="torch-header-and-content">
+  <div class="torch-container">
+    <header class="header">
+      <h3>Product Details</h3>
+    </header>
+    <section class="torch-show-details">
+
+        <div class="torch-show-attribute">
+          <div class="torch-show-label">Name:</div>
+          <div class="torch-show-data"><%= @product.name %></div>
+        </div>
+
+        <div class="torch-show-attribute">
+          <div class="torch-show-label">Description:</div>
+          <div class="torch-show-data"><%= @product.description %></div>
+        </div>
+
+        <div class="torch-show-attribute">
+          <div class="torch-show-label">Price:</div>
+          <div class="torch-show-data"><%= @product.price %></div>
+        </div>
+
+        <div class="torch-show-attribute">
+          <div class="torch-show-label">Inventory count:</div>
+          <div class="torch-show-data"><%= @product.inventory_count %></div>
+        </div>
+
+        <div class="torch-show-attribute">
+          <div class="torch-show-label">Category:</div>
+          <div class="torch-show-data"><%= @product.category.name %></div>
+        </div>
+
+    </section>
+  </div>
+</section>

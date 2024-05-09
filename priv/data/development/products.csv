@@ -1,0 +1,21 @@
+id,name,description,inventory_count,price,category_id
+1,Smartphone,Latest model with 5G,100,799.99,1
+2,Laptop,Powerful gaming laptop,50,1199.99,1
+3,T-Shirt,Cotton t-shirt,200,19.99,2
+4,Jeans,Denim jeans,150,49.99,2
+5,Novel,Bestselling novel,300,9.99,3
+6,Desk,Ergonomic office desk,40,199.99,4
+7,Teddy Bear,Soft plush toy,120,14.99,5
+8,Cereal,Healthy breakfast cereal,180,4.99,6
+9,Football,Official match ball,60,29.99,7
+10,Lipstick,Long-lasting lipstick,90,9.99,8
+11,Car Wax,Premium car wax,70,15.99,9
+12,Wall Clock,Decorative wall clock,30,39.99,10
+13,Lawn Mower,Electric lawn mower,20,249.99,11
+14,Multivitamins,Daily multivitamins,130,19.99,12
+15,Guitar,Acoustic guitar,80,89.99,13
+16,Necklace,Gold-plated necklace,140,59.99,14
+17,Drill,Cordless drill,110,79.99,15
+18,Printer,All-in-one printer,25,149.99,16
+19,Sneakers,Sporty sneakers,70,69.99,17
+20,Watercolor Set,Professional watercolor set,90,29.99,18

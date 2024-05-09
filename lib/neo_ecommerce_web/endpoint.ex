@@ -27,7 +27,7 @@ defmodule NeoEcommerceWeb.Endpoint do
 
   plug(
     Plug.Static,
-    at: "/admin",
+    at: "/torch",
     from: {:torch, "priv/static"},
     gzip: true,
     cache_control_for_etags: "public, max-age=86400",

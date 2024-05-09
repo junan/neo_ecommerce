@@ -51,7 +51,8 @@ defmodule NeoEcommerce.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:argon2_elixir, "~> 4.0"},
-      {:torch, "~> 5.1"}
+      {:torch, "~> 5.1"},
+      {:csv, "~> 3.2"}
     ]
   end
 

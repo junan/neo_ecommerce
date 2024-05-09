@@ -43,7 +43,7 @@ defmodule NeoEcommerceWeb.Router do
     # regular routes
   end
 
-  scope "/admin", NeoEcommerceWeb.Admin do
+  scope "/admin", NeoEcommerceWeb.Admin, as: :admin do
     scope "/" do
       pipe_through :admin_unauth
 
@@ -58,8 +58,7 @@ defmodule NeoEcommerceWeb.Router do
 
       pipe_through :admin
 
-      # get "/", DashboardController, :index
-      # admin routes here
+      resources "/products", ProductController
     end
   end
 

@@ -3,28 +3,27 @@ defmodule NeoEcommerce.Products.Schemas.Product do
 
   import Ecto.Changeset
 
-  alias NeoEcommerce.Products.Schemas.Tag
+  alias NeoEcommerce.Products.Schemas.Category
 
   schema "products" do
     field :name, :string
     field :description, :string
     field :inventory_count, :integer
     field :price, :decimal
-    field :category_id, :id
 
-    many_to_many :tags, Tag, join_through: "products_tags"
+    belongs_to :category, Category
 
     timestamps(type: :utc_datetime)
   end
 
   @doc false
-  def create_changeset(product \\ %__MODULE__{}, attrs) do
+  def changeset(product \\ %__MODULE__{}, attrs) do
     product
     |> cast(attrs, [:name, :description, :price, :inventory_count, :category_id])
-    |> validate_required([:name, :description, :price, :inventory_count, :category_id])
+    |> validate_required([:name, :description, :price, :inventory_count])
     |> validate_number(:price, greater_than: 0)
     |> validate_number(:inventory_count, greater_than_or_equal_to: 0)
-    |> unique_constraint(:name, name: :unique_product_name_category_id)
+    |> unique_constraint(:name)
     |> foreign_key_constraint(:category_id)
   end
 end

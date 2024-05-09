@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= PhoenixHTMLHelpers.Tag.csrf_meta_tag() %>
-    <title>Torch Admin</title>
+    <title>Neo E-Commerce Admin</title>
     <!-- Uncomment to just use the bare bones torch styles rather than the theme -->
-    <!--<link phx-track-static rel="stylesheet" href={Phoenix.VerifiedRoutes.static_path(@conn, "/torch/base.css")}>-->
+    <link phx-track-static rel="stylesheet" href={Phoenix.VerifiedRoutes.static_path(@conn, "/torch/base.css")}>
     <link phx-track-static rel="stylesheet" href={Phoenix.VerifiedRoutes.static_path(@conn, "/torch/theme.css")}>
   </head>
 
@@ -23,12 +23,13 @@
       <section id="torch-nav">
         <div class="torch-container">
           <div class="torch-logo">
-            <a href="/">
-              <h3>Torch</h3>
+            <a href="/admin/products">
+              <h3>Home</h3>
             </a>
           </div>
           <nav class="torch-nav">
-            <!-- nav links here -->
+            <a href="/admin/products">Products</a>
+            <a href="/admin/categories">Categories</a>
           </nav>
         </div>
       </section>

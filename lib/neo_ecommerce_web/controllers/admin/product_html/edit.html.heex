@@ -1,0 +1,14 @@
+<section id="torch-toolbar">
+  <div class="torch-container">
+    <.link href={~p"/admin/products"} class="torch-button"><%= Torch.I18n.message("Cancel") %></.link>
+  </div>
+</section>
+
+<section id="torch-header-and-content">
+  <div class="torch-container">
+    <div class="header">
+      <h3>Edit Product</h3>
+    </div>
+    <.product_form changeset={@changeset} categories={@categories} action={~p"/admin/products/#{@product}"} />
+  </div>
+</section>

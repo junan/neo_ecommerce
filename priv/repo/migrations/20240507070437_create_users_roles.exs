@@ -3,8 +3,8 @@ defmodule NeoEcommerce.Repo.Migrations.CreateUsersRoles do
 
   def change do
     create table(:users_roles, primary_key: false) do
-      add :user_id, references(:users), null: false
-      add :role_id, references(:roles), null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: false
+      add :role_id, references(:roles, on_delete: :delete_all), null: false
     end
 
     create unique_index(:users_roles, [:user_id, :role_id])

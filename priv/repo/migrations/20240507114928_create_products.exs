@@ -8,13 +8,13 @@ defmodule NeoEcommerce.Repo.Migrations.CreateProducts do
       add :price, :decimal, null: false
       add :inventory_count, :integer, default: 0, null: false
 
-      add :category_id, references(:categories, on_delete: :nothing), null: false
+      add :category_id, references(:categories, on_delete: :nilify_all), null: true
 
       timestamps(type: :utc_datetime)
     end
 
     create index(:products, [:category_id])
-    create unique_index(:products, [:name, :category_id], name: :unique_product_name_category_id)
+    create unique_index(:products, [:name])
 
     create constraint(:products, :price_greater_than_zero_check, check: "price > 0")
 

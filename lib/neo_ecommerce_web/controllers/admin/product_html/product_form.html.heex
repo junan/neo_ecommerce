@@ -1,0 +1,19 @@
+<.form :let={f} for={@changeset} action={@action} id="torch-form" enctype="multipart/form-data">
+  <fieldset class="torch-panel">
+    <legend>
+      <span>Details</span>
+    </legend>
+    <%= if @changeset.action do %>
+      <p class="torch-form-error">Oops, something went wrong! Please check the errors below.</p>
+    <% end %>
+    <.torch_input label="Name" field={f[:name]} type="string" />
+    <.torch_input label="Description" field={f[:description]} type="string" />
+    <.torch_input label="Price" field={f[:price]} type="number" />
+    <.torch_input label="Inventory count" field={f[:inventory_count]} type="number" />
+    <.torch_input label="Category" field={f[:category_id]} type="select" options={@categories} />
+
+    <div class="torch-submit-form">
+      <button type="submit" class="torch-submit-button"><%= Torch.I18n.message("Submit") %></button>
+    </div>
+  </fieldset>
+</.form>
