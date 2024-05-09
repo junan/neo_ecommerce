@@ -63,7 +63,7 @@ end
 
 # Populate Users
 populate_users = fn ->
-  users_csv = Application.app_dir(:neo_ecommerce, "priv/data/development/admin_users.csv")
+  users_csv = Application.app_dir(:neo_ecommerce, "priv/data/development/users.csv")
 
   users_csv
   |> read_csv.()

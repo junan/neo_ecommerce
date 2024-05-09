@@ -59,6 +59,8 @@ defmodule NeoEcommerceWeb.Router do
       pipe_through :admin
 
       resources "/products", ProductController
+      resources "/categories", CategoryController
+      get "/", ProductController, :index
     end
   end
 

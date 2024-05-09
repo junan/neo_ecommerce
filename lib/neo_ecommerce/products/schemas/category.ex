@@ -10,7 +10,7 @@ defmodule NeoEcommerce.Products.Schemas.Category do
   end
 
   @doc false
-  def create_changeset(category \\ %__MODULE__{}, attrs) do
+  def changeset(category \\ %__MODULE__{}, attrs) do
     category
     |> cast(attrs, [:name])
     |> validate_required([:name])

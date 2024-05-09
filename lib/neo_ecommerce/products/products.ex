@@ -1,6 +1,5 @@
 defmodule NeoEcommerce.Products.Products do
   import Ecto.Query, warn: false
-  import Filtrex.Type.Config
 
   alias NeoEcommerce.Repo
   alias NeoEcommerce.Products.Schemas.Product
