@@ -18,7 +18,10 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
   @paginate_size 12
 
   def mount(_params, _session, socket) do
-    if connected?(socket), do: Phoenix.PubSub.subscribe(NeoEcommerce.PubSub, @topic)
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(NeoEcommerce.PubSub, @topic)
+      Phoenix.PubSub.broadcast(NeoEcommerce.PubSub, @topic, {:viewer_joined})
+    end
 
     socket =
       socket
@@ -29,6 +32,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
       |> assign(:page, 1)
       |> assign(:page_size, @paginate_size)
       |> assign(:sort_options, @sort_options)
+      |> assign(:user_count, 0)
 
     {:ok, assign(socket, :products, list_products(socket))}
   end
@@ -67,6 +71,19 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
   def handle_info({:product_deleted, product}, socket) do
     products = Enum.reject(socket.assigns.products, fn p -> p.id == product.id end)
     {:noreply, assign(socket, :products, products)}
+  end
+
+  def handle_info({:viewer_joined}, socket) do
+    {:noreply, assign(socket, :user_count, socket.assigns.user_count + 1)}
+  end
+
+  def handle_info({:viewer_left}, socket) do
+    {:noreply, assign(socket, :user_count, max(socket.assigns.user_count - 1, 0))}
+  end
+
+  def terminate(_reason, socket) do
+    Phoenix.PubSub.broadcast(NeoEcommerce.PubSub, @topic, {:viewer_left})
+    :ok
   end
 
   def handle_event("filter", %{"filter_category" => category_id}, socket) do
