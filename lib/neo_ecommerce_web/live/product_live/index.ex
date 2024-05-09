@@ -3,6 +3,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
 
   alias NeoEcommerce.Products.Products
   alias NeoEcommerce.Products.Categories
+  alias NeoEcommerce.Products.ViewerCount
 
   @topic "products:all"
 
@@ -21,6 +22,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     if connected?(socket) do
       Phoenix.PubSub.subscribe(NeoEcommerce.PubSub, @topic)
       Phoenix.PubSub.broadcast(NeoEcommerce.PubSub, @topic, {:viewer_joined})
+      ViewerCount.increment()
     end
 
     socket =
@@ -32,7 +34,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
       |> assign(:page, 1)
       |> assign(:page_size, @paginate_size)
       |> assign(:sort_options, @sort_options)
-      |> assign(:user_count, 0)
+      |> assign(:user_count, ViewerCount.get_count())
 
     {:ok, assign(socket, :products, list_products(socket))}
   end
@@ -54,7 +56,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     {:noreply, assign(new_socket, :products, list_products(new_socket))}
   end
 
-  def handle_info({:product_created, product}, socket) do
+  def handle_info({:product_created, _product}, socket) do
     {:noreply, assign(socket, :products, list_products(socket))}
   end
 
@@ -81,8 +83,9 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     {:noreply, assign(socket, :user_count, max(socket.assigns.user_count - 1, 0))}
   end
 
-  def terminate(_reason, socket) do
+  def terminate(_reason, _socket) do
     Phoenix.PubSub.broadcast(NeoEcommerce.PubSub, @topic, {:viewer_left})
+    ViewerCount.decrement()
     :ok
   end
 

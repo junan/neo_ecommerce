@@ -17,6 +17,7 @@ defmodule NeoEcommerce.Application do
       # Start a worker by calling: NeoEcommerce.Worker.start_link(arg)
       # {NeoEcommerce.Worker, arg},
       # Start to serve requests, typically the last entry
+      NeoEcommerce.Products.ViewerCount,
       NeoEcommerceWeb.Endpoint
     ]
 
