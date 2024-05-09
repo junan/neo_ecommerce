@@ -10,8 +10,6 @@ defmodule NeoEcommerceWeb.Admin.SessionController do
   end
 
   def create(conn, %{"email" => email, "password" => password}) do
-    IO.inspect(Auth.authenticate_user(email, password), label: "debug")
-
     case Auth.authenticate_user(email, password) do
       {:ok, user} ->
         conn
