@@ -14,7 +14,7 @@ defmodule NeoEcommerce.Products.Categories do
 
   def create(attrs) do
     attrs
-    |> Category.create_changeset()
+    |> Category.changeset()
     |> Repo.insert()
   end
 

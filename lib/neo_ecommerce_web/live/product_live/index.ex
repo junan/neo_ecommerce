@@ -2,7 +2,6 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
   use NeoEcommerceWeb, :live_view
 
   alias NeoEcommerce.Products.Products
-  alias NeoEcommerce.Products.Schemas.Product
 
   @topic "products:all"
 

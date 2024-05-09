@@ -52,7 +52,8 @@ defmodule NeoEcommerce.MixProject do
       {:bandit, "~> 1.2"},
       {:argon2_elixir, "~> 4.0"},
       {:torch, "~> 5.1"},
-      {:csv, "~> 3.2"}
+      {:csv, "~> 3.2"},
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]
   end
 
@@ -70,10 +71,7 @@ defmodule NeoEcommerce.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["esbuild.install --if-missing"],
       "assets.build": ["esbuild neo_ecommerce"],
-      "assets.deploy": [
-        "esbuild neo_ecommerce --minify",
-        "phx.digest"
-      ]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end

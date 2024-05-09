@@ -1,6 +1,4 @@
 defmodule NeoEcommerce.Helpers.DbHelper do
-  import Ecto.Query
-
   alias NeoEcommerce.Repo
 
   def reset_pk_sequence!(table_name) do

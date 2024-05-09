@@ -5,7 +5,6 @@ defmodule NeoEcommerceWeb.Admin.CategoryHTML do
   use PhoenixHTMLHelpers
 
   import Torch.TableView
-  import Torch.FilterView
   import Torch.Component
 
   def error_tag(form, field) do

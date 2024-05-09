@@ -6,7 +6,5 @@ defmodule NeoEcommerceWeb.Admin.SessionHTML do
   """
   use NeoEcommerceWeb, :html
 
-  import Phoenix.HTML.Form
-
   embed_templates "session_html/*"
 end

@@ -25,7 +25,8 @@ config :neo_ecommerce, NeoEcommerceWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "kpAzWLqQ97ZjC9I3vimASsFEymAZD9CMNak/zl3aWVcYfiK0m7ERnc+5rOeV+6fS",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:neo_ecommerce, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:neo_ecommerce, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
