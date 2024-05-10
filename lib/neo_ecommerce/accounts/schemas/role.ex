@@ -14,7 +14,10 @@ defmodule NeoEcommerce.Accounts.Schemas.Role do
     timestamps(type: :utc_datetime)
   end
 
-  @doc false
+  @doc """
+  Creates a changeset based on the `role` and `attrs`. It will downcase the role name(to avoid case sensitivity issues like `Admin` and `admin`)
+  """
+  @spec create_changeset(Role.t(), map()) :: Ecto.Changeset.t()
   def create_changeset(role \\ %__MODULE__{}, attrs) do
     role
     |> cast(attrs, [:name])

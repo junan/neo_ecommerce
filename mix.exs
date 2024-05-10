@@ -52,7 +52,7 @@ defmodule NeoEcommerce.MixProject do
       {:bandit, "~> 1.2"},
       # For password hashing
       {:argon2_elixir, "~> 4.0"},
-      # For admin generator
+      # For admin interface
       {:torch, "~> 5.1"},
       # For CSV encoding and decoding
       {:csv, "~> 3.2"},

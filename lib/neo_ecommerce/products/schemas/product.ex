@@ -18,7 +18,10 @@ defmodule NeoEcommerce.Products.Schemas.Product do
     timestamps(type: :utc_datetime)
   end
 
-  @doc false
+  @doc """
+  Creates a changeset based on the `product` and `attrs`.
+  """
+  @spec changeset(Product.t(), map()) :: Ecto.Changeset.t()
   def changeset(product \\ %__MODULE__{}, attrs) do
     product
     |> cast(attrs, [:name, :description, :price, :inventory_count, :category_id])

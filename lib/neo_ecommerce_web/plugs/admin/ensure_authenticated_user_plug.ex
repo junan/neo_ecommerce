@@ -9,8 +9,15 @@ defmodule NeoEcommerceWeb.Admin.EnsureAuthenticatedUserPlug do
 
   alias NeoEcommerce.Accounts.Users
 
+  @doc """
+  Initializes any arguments or options to be passed to `call/2`
+  """
   def init(opts), do: opts
 
+  @doc """
+  Ensures that the user is authenticated.
+  """
+  @spec call(Plug.Conn.t(), Keyword.t()) :: Plug.Conn.t()
   def call(conn, _opts) do
     if conn.assigns[:current_user] do
       conn

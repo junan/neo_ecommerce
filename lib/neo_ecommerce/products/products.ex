@@ -11,6 +11,10 @@ defmodule NeoEcommerce.Products.Products do
     model: NeoEcommerce.Products.Schemas.Product,
     name: :products
 
+  @doc """
+  Creates a product by passing a map of attributes.
+  """
+  @spec create_product(map()) :: {:ok, Product.t()} | {:error, Ecto.Changeset.t()}
   def create_product(attrs) do
     attrs
     |> Product.changeset()
@@ -27,6 +31,7 @@ defmodule NeoEcommerce.Products.Products do
       [%Product{}, ...]
 
   """
+  @spec list_products() :: [Product.t()]
   def list_products do
     query =
       from p in Product,
@@ -50,6 +55,7 @@ defmodule NeoEcommerce.Products.Products do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_product!(integer()) :: Product.t()
   def get_product!(id) do
     Repo.get!(Product, id) |> Repo.preload(:category)
   end
@@ -66,6 +72,7 @@ defmodule NeoEcommerce.Products.Products do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_product(Product.t(), map()) :: {:ok, Product.t()} | {:error, Ecto.Changeset.t()}
   def update_product(%Product{} = product, attrs) do
     product
     |> Product.changeset(attrs)
@@ -85,6 +92,7 @@ defmodule NeoEcommerce.Products.Products do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_product(Product.t()) :: {:ok, Product.t()} | {:error, Ecto.Changeset.t()}
   def delete_product(%Product{} = product) do
     product
     |> Repo.delete()
@@ -100,6 +108,7 @@ defmodule NeoEcommerce.Products.Products do
       %Ecto.Changeset{source: %Product{}}
 
   """
+  @spec change_product(Product.t(), map()) :: Ecto.Changeset.t()
   def change_product(%Product{} = product, attrs \\ %{}) do
     Product.changeset(product, attrs)
   end

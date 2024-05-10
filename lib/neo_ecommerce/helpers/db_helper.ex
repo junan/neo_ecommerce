@@ -3,6 +3,10 @@ defmodule NeoEcommerce.Helpers.DbHelper do
 
   alias NeoEcommerce.Repo
 
+  @doc """
+  Resets the sequence of a table’s primary key to the maximum value. This function is needed as in the `/priv/repo/seeds.exs` file, we are inserting data into the tables and the primary key sequence is not updated. This function is called in the `/priv/repo/seeds.exs` file.
+  """
+  @spec reset_pk_sequence!(String.t()) :: :ok
   def reset_pk_sequence!(table_name) do
     sql = """
     DO $$ BEGIN

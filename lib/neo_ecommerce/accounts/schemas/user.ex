@@ -24,7 +24,10 @@ defmodule NeoEcommerce.Accounts.Schemas.User do
     timestamps(type: :utc_datetime)
   end
 
-  @doc false
+  @doc """
+  Creates a changeset based on the `user` and `attrs`. It will convert the password to a hashed password
+  """
+  @spec create_changeset(User.t(), map()) :: Ecto.Changeset.t()
   def create_changeset(user \\ %__MODULE__{}, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email, :password])

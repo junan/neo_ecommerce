@@ -15,12 +15,6 @@ defmodule NeoEcommerceWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", NeoEcommerceWeb do
-    pipe_through :browser
-
-    live "/", ProductLive.Index, :index
-  end
-
   pipeline :admin_auth do
     plug :browser
     plug NeoEcommerceWeb.Admin.EnsureAuthenticatedUserPlug
@@ -37,12 +31,7 @@ defmodule NeoEcommerceWeb.Router do
     plug NeoEcommerceWeb.Admin.EnsureAdminUserPlug
   end
 
-  scope "/", NeoEcommerceWeb do
-    pipe_through :browser
-
-    # regular routes
-  end
-
+  # All the admin routes are scoped under "/admin"
   scope "/admin", NeoEcommerceWeb.Admin, as: :admin do
     scope "/" do
       pipe_through :admin_unauth
@@ -62,6 +51,13 @@ defmodule NeoEcommerceWeb.Router do
       resources "/categories", CategoryController
       get "/", ProductController, :index
     end
+  end
+
+  # Public routes
+  scope "/", NeoEcommerceWeb do
+    pipe_through :browser
+
+    live "/", ProductLive.Index, :index
   end
 
   # Other scopes may use custom stacks.

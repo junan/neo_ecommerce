@@ -11,9 +11,16 @@ defmodule NeoEcommerce.Products.Categories do
     model: NeoEcommerce.Products.Schemas.Category,
     name: :categories
 
+  @doc """
+  Returns the list of product categories by name and id.
+  """
+  @spec list_product_categories_by_name_and_id() :: [{:name, :id}]
   def list_product_categories_by_name_and_id,
     do: Repo.all(from(c in Category, select: {c.name, c.id}))
 
+  @doc """
+  Creates a category by passing a map of attributes.
+  """
   def create(attrs) do
     attrs
     |> Category.changeset()
@@ -29,6 +36,7 @@ defmodule NeoEcommerce.Products.Categories do
       [%Category{}, ...]
 
   """
+  @spec list_categories() :: [Category.t()]
   def list_categories do
     Repo.all(Category)
   end
@@ -47,6 +55,7 @@ defmodule NeoEcommerce.Products.Categories do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_category!(integer()) :: Category.t()
   def get_category!(id), do: Repo.get!(Category, id)
 
   @doc """
@@ -61,6 +70,7 @@ defmodule NeoEcommerce.Products.Categories do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_category(map()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def create_category(attrs \\ %{}) do
     attrs
     |> Category.changeset()
@@ -79,6 +89,7 @@ defmodule NeoEcommerce.Products.Categories do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_category(Category.t(), map()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def update_category(%Category{} = category, attrs) do
     category
     |> Category.changeset(attrs)
@@ -97,6 +108,7 @@ defmodule NeoEcommerce.Products.Categories do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_category(Category.t()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def delete_category(%Category{} = category) do
     Repo.delete(category)
   end
@@ -110,6 +122,7 @@ defmodule NeoEcommerce.Products.Categories do
       %Ecto.Changeset{source: %Category{}}
 
   """
+  @spec change_category(Category.t(), map()) :: Ecto.Changeset.t()
   def change_category(%Category{} = category, attrs \\ %{}) do
     Category.changeset(category, attrs)
   end
