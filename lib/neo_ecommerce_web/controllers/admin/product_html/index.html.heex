@@ -35,6 +35,7 @@
                 <td><%= product.inventory_count %></td>
 
               <td class="torch-actions">
+                <span><.link href={~p"/admin/products/#{product}"}><%= Torch.I18n.message("Show") %></.link></span>
                 <span><.link href={~p"/admin/products/#{product}/edit"}><%= Torch.I18n.message("Edit") %></.link></span>
                 <span><.link href={~p"/admin/products/#{product}"} method="delete" data-confirm={Torch.I18n.message("Are you sure?")}><%= Torch.I18n.message("Delete") %></.link></span>
               </td>

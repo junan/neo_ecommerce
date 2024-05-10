@@ -84,14 +84,8 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
   """
   @spec handle_info({:product_updated, Product.t()}, Phoenix.LiveView.Socket.t()) ::
           {:noreply, Phoenix.LiveView.Socket.t()}
-  def handle_info({:product_updated, product}, socket) do
-    products =
-      Enum.map(socket.assigns.products, fn
-        p when p.id == product.id -> product
-        p -> p
-      end)
-
-    {:noreply, assign(socket, :products, products)}
+  def handle_info({:product_updated, _product}, socket) do
+    {:noreply, assign(socket, :products, list_products(socket))}
   end
 
   @doc """
@@ -100,9 +94,8 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
   """
   @spec handle_info({:product_deleted, Product.t()}, Phoenix.LiveView.Socket.t()) ::
           {:noreply, Phoenix.LiveView.Socket.t()}
-  def handle_info({:product_deleted, product}, socket) do
-    products = Enum.reject(socket.assigns.products, fn p -> p.id == product.id end)
-    {:noreply, assign(socket, :products, products)}
+  def handle_info({:product_deleted, _product}, socket) do
+    {:noreply, assign(socket, :products, list_products(socket))}
   end
 
   @doc """
@@ -197,8 +190,11 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     Enum.filter(products, &(&1.category_id == category_id))
   end
 
-  defp apply_sort(products, "name_asc"), do: Enum.sort_by(products, & &1.name)
-  defp apply_sort(products, "name_desc"), do: Enum.sort_by(products, & &1.name, &>=/2)
+  defp apply_sort(products, "name_asc"), do: Enum.sort_by(products, &String.downcase(&1.name))
+
+  defp apply_sort(products, "name_desc"),
+    do: Enum.sort_by(products, &String.downcase(&1.name), &>=/2)
+
   defp apply_sort(products, "price_asc"), do: Enum.sort_by(products, & &1.price)
   defp apply_sort(products, "price_desc"), do: Enum.sort_by(products, & &1.price, &>=/2)
   defp apply_sort(products, "inventory_asc"), do: Enum.sort_by(products, & &1.inventory_count)

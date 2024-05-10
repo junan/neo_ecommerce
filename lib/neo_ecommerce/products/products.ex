@@ -77,7 +77,14 @@ defmodule NeoEcommerce.Products.Products do
     product
     |> Product.changeset(attrs)
     |> Repo.update()
-    |> notify(:product_updated)
+    |> case do
+      {:ok, updated_product} ->
+        updated_product = Repo.preload(updated_product, :category)
+        notify({:ok, updated_product}, :product_updated)
+
+      error ->
+        error
+    end
   end
 
   @doc """

@@ -56,7 +56,13 @@
             <p tabindex="0" class="focus:outline-none text-xs text-gray-600 mt-2"><%= product.description %></p>
 
             <div class="flex items-center justify-between mt-4">
-              <h2 tabindex="0" class="focus:outline-none text-indigo-700 text-xs font-semibold">Category: <%= product.category.name %></h2>
+              <h2 tabindex="0" class="focus:outline-none text-indigo-700 text-xs font-semibold">
+                Category: <%= if product.category do %>
+                <%= product.category.name %>
+              <% else %>
+                N/A
+              <% end %>
+              </h2>
               <h3 tabindex="0" class="focus:outline-none text-indigo-700 text-xl font-semibold">$<%= product.price %></h3>
             </div>
           </div>
