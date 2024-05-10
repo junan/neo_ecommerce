@@ -35,3 +35,5 @@ neo_ecommerce-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Mac OS files
+.DS_Store

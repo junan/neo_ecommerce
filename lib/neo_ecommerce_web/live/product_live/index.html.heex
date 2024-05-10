@@ -48,12 +48,7 @@
       <%= for product <- @products do %>
         <div tabindex="0" class="focus:outline-none mx-2 my-2 w-72 xl:mb-0 mb-8 shadow-lg rounded-lg overflow-hidden border border-gray-200 bg-white">
           <div>
-            <img
-              alt={product.name}
-              src="https://cdn.tuk.dev/assets/templates/classified/Bitmap.png"
-              tabindex="0"
-              class="focus:outline-none w-full h-44 object-cover"
-            />
+            <img alt={product.name} src={~p"/images/dummy_image.png"} class="focus:outline-none w-full h-44 object-cover" />
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between">
