@@ -1,5 +1,5 @@
 defmodule NeoEcommerceWeb.ConnCase do
-  @moduledoc """
+  @moduledoc false"
   This module defines the test case to be used by
   tests that require setting up a connection.
 

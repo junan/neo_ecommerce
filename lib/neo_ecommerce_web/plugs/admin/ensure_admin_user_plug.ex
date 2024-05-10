@@ -1,4 +1,6 @@
 defmodule NeoEcommerceWeb.Admin.EnsureAdminUserPlug do
+  @moduledoc false
+
   alias NeoEcommerce.Repo
 
   @router NeoEcommerceWeb.Router

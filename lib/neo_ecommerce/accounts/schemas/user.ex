@@ -1,15 +1,19 @@
 defmodule NeoEcommerce.Accounts.Schemas.User do
+  @moduledoc false
+
   use Ecto.Schema
 
   import Ecto.Changeset
 
   alias NeoEcommerce.Accounts.Schemas.Role
   alias NeoEcommerce.Auth.Hasher
+  alias NeoEcommerce.Accounts.Validations.UserValidator
 
   schema "users" do
     field :email, :string
     field :first_name, :string
     field :last_name, :string
+    # Hashed password will be stored here
     field :password_hash, :string
 
     # Virtual attribute to hold the password
@@ -26,7 +30,8 @@ defmodule NeoEcommerce.Accounts.Schemas.User do
     |> cast(attrs, [:first_name, :last_name, :email, :password])
     |> validate_required([:first_name, :last_name, :email, :password])
     |> unique_constraint(:email)
-    # TODO: validate email format and password
+    |> UserValidator.validate_email()
+    |> UserValidator.validate_password()
     |> maybe_hash_password()
   end
 

@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Accounts.Schemas.Role do
+  @moduledoc false
+
   use Ecto.Schema
 
   import Ecto.Changeset

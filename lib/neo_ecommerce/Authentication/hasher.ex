@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Auth.Hasher do
+  @moduledoc false
+
   def hash_secret(secret, :argon2), do: Argon2.hash_pwd_salt(secret)
   def hash_secret(secret, :sha256), do: :crypto.hash(:sha256, secret)
 

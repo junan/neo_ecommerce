@@ -1,5 +1,5 @@
 defmodule NeoEcommerce.DataCase do
-  @moduledoc """
+  @moduledoc false"
   This module defines the setup for tests requiring
   access to the application's data layer.
 

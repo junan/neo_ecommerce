@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Products.ViewerCount do
+  @moduledoc false
+
   use GenServer
 
   @table_name :viewer_count

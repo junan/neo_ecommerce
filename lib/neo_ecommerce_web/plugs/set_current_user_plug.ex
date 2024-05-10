@@ -1,4 +1,6 @@
 defmodule NeoEcommerceWeb.SetCurrentUserPlug do
+  @moduledoc false
+
   import Plug.Conn
 
   alias NeoEcommerce.Accounts.Users

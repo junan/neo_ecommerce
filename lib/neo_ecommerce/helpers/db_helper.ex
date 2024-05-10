@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Helpers.DbHelper do
+  @moduledoc false
+
   alias NeoEcommerce.Repo
 
   def reset_pk_sequence!(table_name) do

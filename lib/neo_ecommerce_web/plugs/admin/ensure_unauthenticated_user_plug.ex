@@ -1,4 +1,6 @@
 defmodule NeoEcommerceWeb.Admin.EnsureUnauthenticatedUserPlug do
+  @moduledoc false
+
   @router NeoEcommerceWeb.Router
 
   import Plug.Conn

@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Authentication.Auth do
+  @moduledoc false
+
   alias NeoEcommerce.Accounts.Users
   alias NeoEcommerce.Accounts.Schemas.User
   alias NeoEcommerce.Auth.Hasher

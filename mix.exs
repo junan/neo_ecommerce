@@ -50,10 +50,16 @@ defmodule NeoEcommerce.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
+      # For password hashing
       {:argon2_elixir, "~> 4.0"},
+      # For admin generator
       {:torch, "~> 5.1"},
+      # For CSV encoding and decoding
       {:csv, "~> 3.2"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      # For styling
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      # For static code analyzing
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 

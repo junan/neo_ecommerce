@@ -1,4 +1,6 @@
 defmodule NeoEcommerce.Accounts.Users do
+  @moduledoc false
+
   alias NeoEcommerce.Repo
   alias NeoEcommerce.Accounts.Schemas.{User, Role}
 

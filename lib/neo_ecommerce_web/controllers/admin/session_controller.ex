@@ -4,7 +4,6 @@ defmodule NeoEcommerceWeb.Admin.SessionController do
   alias NeoEcommerce.Authentication.Auth
 
   def new(conn, _params) do
-    # TODO: Remove this line
     csrf_token = Plug.CSRFProtection.get_csrf_token()
     render(conn, "new.html", csrf_token: csrf_token)
   end
