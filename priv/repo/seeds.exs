@@ -1,3 +1,5 @@
+# Note: For the seeding initial data, I took help from chat-GPT, mostly for the generating the dummy data(in CSV format)
+
 alias NeoEcommerce.Repo
 alias NeoEcommerce.Products.Schemas.{Category, Product}
 alias NeoEcommerce.Accounts.Schemas.{User, Role}

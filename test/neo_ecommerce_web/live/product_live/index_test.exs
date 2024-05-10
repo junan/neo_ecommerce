@@ -1,3 +1,5 @@
+# Note: For this live view test, I took help from chat-GPT
+
 defmodule NeoEcommerceWeb.ProductLive.IndexTest do
   use NeoEcommerceWeb.ConnCase, async: true
 

@@ -57,10 +57,17 @@ These instructions help you up and run the project on your local machine.
 
 ### Usage on locally
 
-1. The server should access at `http://localhost:4023`
+1. The server should access at [http://localhost:4023](http://localhost:4023)
 2. You should see some pre-populated products there, where you can sort, filter, paginate products
+3. For admin access, navigate [http://localhost:4023/admin/login](http://localhost:4023/admin/login)
+4. Use `john.doe@example.com` and `admin` as credential to login
+5. After login as admin, you can add/edit/delete products there, for every action, it will update in realtime the public product list page for all users.
+6. You can create/edit/update categories too there
 
-3. For admin access, navigate `http://localhost:4023/admin`
+### Usage on Fly.io server
+1. The server should access at [https://neo-ecommerce.fly.dev](https://neo-ecommerce.fly.dev)
+2. You should see some pre-populated products there, where you can sort, filter, paginate products
+3. For admin access, navigate [https://neo-ecommerce.fly.dev/admin/login](https://neo-ecommerce.fly.dev/admin/login)
 4. Use `john.doe@example.com` and `admin` as credential to login
 5. After login as admin, you can add/edit/delete products there, for every action, it will update in realtime the public product list page for all users.
 6. You can create/edit/update categories too there
