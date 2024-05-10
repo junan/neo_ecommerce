@@ -53,6 +53,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     sort_by = Map.get(params, "sort_by", "name_asc")
     filter_category = Map.get(params, "filter_category", nil)
     page = Map.get(params, "page", "1") |> String.to_integer()
+    page_size = Map.get(params, "page_size") |> parse_page_size(socket)
 
     new_socket =
       socket
@@ -62,6 +63,7 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
         if(filter_category in [nil, ""], do: nil, else: String.to_integer(filter_category))
       )
       |> assign(:page, page)
+      |> maybe_assign_page_size(page_size)
 
     {:noreply, assign(new_socket, :products, list_products(new_socket))}
   end
@@ -218,5 +220,12 @@ defmodule NeoEcommerceWeb.ProductLive.Index do
     products
     |> Enum.chunk_every(page_size)
     |> Enum.at(page - 1, [])
+  end
+
+  defp parse_page_size(nil, socket), do: socket.assigns.page_size
+  defp parse_page_size(size, _socket), do: String.to_integer(size)
+
+  defp maybe_assign_page_size(socket, page_size) do
+    assign(socket, :page_size, page_size)
   end
 end

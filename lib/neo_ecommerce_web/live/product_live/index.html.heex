@@ -3,13 +3,12 @@
     <div class="flex items-center justify-between mb-8">
       <div class="flex space-x-4">
         <!-- Sorting -->
-        <form>
+        <form id="sort_form" phx-change="sort">
           <label for="sort_by" class="block text-sm font-medium text-gray-700">Sort By</label>
           <select
             id="sort_by"
             name="sort_by"
             class="mt-1 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            phx-change="sort"
           >
             <%= for {label, value} <- @sort_options do %>
               <option value={value} selected={@sort_by == value}><%= label %></option>
@@ -18,13 +17,12 @@
         </form>
 
         <!-- Filtering -->
-        <form>
+        <form id="filter_category_form" phx-change="filter">
           <label for="filter_category" class="block text-sm font-medium text-gray-700">Filter by Category</label>
           <select
             id="filter_category"
             name="filter_category"
             class="mt-1 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            phx-change="filter"
           >
             <option value="">All Categories</option>
             <%= for category <- @categories do %>
