@@ -27,7 +27,7 @@ config :torch,
 
 config :tailwind,
   version: "3.4.3",
-  default: [
+  neo_ecommerce: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

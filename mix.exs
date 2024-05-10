@@ -75,9 +75,13 @@ defmodule NeoEcommerce.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["esbuild.install --if-missing"],
-      "assets.build": ["esbuild neo_ecommerce"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
+      "assets.build": ["esbuild neo_ecommerce", "tailwind neo_ecommerce"],
+      "assets.deploy": [
+        "tailwind neo_ecommerce --minify",
+        "esbuild neo_ecommerce --minify",
+        "phx.digest"
+      ]
     ]
   end
 end
